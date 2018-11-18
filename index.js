@@ -7,18 +7,20 @@ let otpnum = require('./utility/otpGenerator.js');
 
 class SendMsg {
 
-    /**
-     * @author Ankush Khotpal
-     * @description Creates a new SendMsg instance
-     * @param {string} SetURL for SMSW.co.in (http://smsw.co.in/API/WebSMS/Http/v1.0a/)
-     * @param {string} username for SMSW.co.in
-     * @param {string} password for SMSW.co.in
-     * @param {string, optional} messageTemplate
-     */
-    constructor(url, username, password, messageTemplate) {
-        this.setURL = url;
-        this.username = username;
-        this.password = password;
+   /**
+    * @author Ankush Khotpal
+    * @description Creates a new SendMsg instance
+    * @param {string} username for SMSW.co.in
+    * @param {string} password for SMSW.co.in
+    * @param {string} routeId (provided by SMSW.co.in)
+    * @param {string} format (json | text)
+    * @param {string, optional} messageTemplate
+    */
+    constructor(username, password, routeId, format, messageTemplate) {
+       this.username = username;
+       this.password = password;
+       this.routeId = routeId;
+       this.format = format;
         if (messageTemplate) {
             this.messageTemplate = messageTemplate;
         } else {
@@ -32,8 +34,7 @@ class SendMsg {
      * @returns {string} Base URL for SMSW api call
      */
     static getBaseURL() {
-        return this.setURL;
-        // return "http://smsw.co.in/API/WebSMS/Http/v1.0a/";
+        return "http://smsw.co.in/API/WebSMS/Http/v1.0a/";
     }
 
     /**
@@ -57,11 +58,9 @@ class SendMsg {
      * @param {string} contactNumber receiver's mobile number along with country code
      * @param {string} senderId
      * @param {string, optional} otp
-     * @param {string} routeId (provided by SMSW.co.in)
-     * @param {string} format (json | text)
      * Return promise if no callback is passed and promises available
      */
-    send(contactNumber, senderId, otp, routeId, format, callback) {
+    send(contactNumber, senderId, otp, callback) {
         if (typeof otp === 'function') {
             callback = otp;
             otp = SendMsg.generateOtp()
@@ -73,8 +72,8 @@ class SendMsg {
             to: contactNumber,
             otp: otp,
             message: this.messageTemplate.replace('{{otp}}', otp),
-            route_id: routeId,
-            format: format,
+            route_id: this.routeId,
+            format: this.format,
             otp_expiry: this.otp_expiry
         };
         return SendMsg.sendRequest('get', 'index.php', args, callback);

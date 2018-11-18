@@ -4,7 +4,6 @@
 This package is intended to consume SMS Gateway-API as Node module. Which will help you to use to send auto generated otp with custom message.
 
 
-
 ### Code Set-up:
 
 1. Install the NPM module
@@ -12,54 +11,59 @@ This package is intended to consume SMS Gateway-API as Node module. Which will h
 npm install npm-sendmsg --save
 ******************************************
 
+
 2. Require the package in your code.
 ******************************************
 const SendMsg = require('npm-sendmsg');
 ******************************************
 
-3. Setup your configuration for http://smsw.co.in with provided username and password with url
+
+3. Setup your configuration for http://smsw.co.in with provided username and password
 **************************************************************************
-const sendMsg = new sendMsg('http://smsw.co.in/API/WebSMS/Http/v1.0a/', 'username', 'password', 'messageTemplate');
+const sendMsg = new sendMsg('username', 'password', 'routId', 'format' 'messageTemplate');
 **************************************************************************
 NOTE BY:- 'messageTemplate' is optional. For custom message.
 
+
 **************************************************************************
-const sendMsg = new sendMsg('http://smsw.co.in/API/WebSMS/Http/v1.0a/', 'username', 'password', 'messageTemplate');
+const sendMsg = new sendMsg('username', 'password', 'routId', 'format');
 **************************************************************************
 That's all, your are ready to use
+
 
 ### Requests
 
 You now have the send, retry and verify otp via following methods.
-****************************************************************************
+**************************************************************************
 sendMsg.send(contactNumber, senderId, otp, routeId, format, callback); //otp is optional if not sent it'll be generated automatically
 //routeId provided by smsw.co.in service provided
 // format of request and response for api
-****************************************************************************
+**************************************************************************
 
 ### Note:
 
 In `callback` function you'll get two parameters but you have to always listen for second param instead of direct error object.
 Error object sample code
-****************************************************************************
+**************************************************************************
 {"type":"error","message":"ERROR_MESSAGE"}
-****************************************************************************
+**************************************************************************
+
 
 ### Usage:
 
 To send OTP, without optional parameters
-*********************************************************************************
-sendMsg.send("9711998846", "ANKIND", "","31", "json", function (error, data) {
+**************************************************************************
+sendMsg.send("9711998846", "ANKIND", function (error, data) {
   console.log(data);
 });
-*********************************************************************************
+**************************************************************************
 
 To send OTP, with optional parameters
-***************************************************************************************
-sendMsg.send("9711998846", "ANKIND", "4635", "31", "json", function (error, data) {
+***********************************************************************************
+sendMsg.send("9711998846", "ANKIND", "4635", function (error, data) {
   console.log(data);
 });
-****************************************************************************************
+***********************************************************************************
 
 If you want to set custom expiry of OTP verification  
 ****************************************************************************************
@@ -72,7 +76,7 @@ sendMsg.setOtpExpiry('60'); //in minutes
 By default sendMsg uses default message template, but custom message template can also set in constructor like
 ************************************************************************************************************************************
 const SendMsg = require('npm-sendmsg');
-const sendMsg = new SendMsg('http://smsw.co.in/API/WebSMS/Http/v1.0a/', 'username', 'password', 'Your otp is {{otp}}. For security reasons, DO NOT share this OTP with anyone');
+const sendMsg = new SendMsg( 'username', 'password', 'routId', 'format' 'Your otp is {{otp}}.For security reasons, DO NOT share this OTP with anyone');
 ************************************************************************************************************************************
 
 `{{otp}}` expression is used to inject generated otp in message.
