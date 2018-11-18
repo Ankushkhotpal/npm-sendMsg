@@ -9,6 +9,8 @@
   },
   "keywords": [
     "npm",
+    "API",
+    "sendMsg",
     "npm-sendMsg"
   ],
   "author": "Ankush Khotpal",

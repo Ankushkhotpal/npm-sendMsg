@@ -49,14 +49,14 @@ Error object sample code
 
 To send OTP, without optional parameters
 *********************************************************************************
-sendMsg.send("919999999999", "PRIIND", "","31", "json", function (error, data) {
+sendMsg.send("9711998846", "ANKIND", "","31", "json", function (error, data) {
   console.log(data);
 });
 *********************************************************************************
 
 To send OTP, with optional parameters
 ***************************************************************************************
-sendMsg.send("919999999999", "ANKIND", "4635", "31", "json", function (error, data) {
+sendMsg.send("9711998846", "ANKIND", "4635", "31", "json", function (error, data) {
   console.log(data);
 });
 ****************************************************************************************
