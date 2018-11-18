@@ -6,35 +6,7 @@ let send_request = require('./utility/send_request.js')
 class SendMsg {
 
     /**
-     * @author Ankush Khotpal
-     * @description Creates a new SendMsg instance
-     * @param {string} SetURL for SMSW.co.in (http://smsw.co.in/API/WebSMS/Http/v1.0a/)
-     * @param {string} username for SMSW.co.in
-     * @param {string} password for SMSW.co.in
-     * @param {string, optional} messageTemplate
-     */
-    constructor(url, username, password, messageTemplate) {
-        this.setURL = url;
-        this.username = username;
-        this.password = password;
-        if (messageTemplate) {
-            this.messageTemplate = messageTemplate;
-        } else {
-            this.messageTemplate = "Your otp is {{otp}}. For security reasons, DO NOT share this OTP with anyone";
-        }
-        this.otp_expiry = 1440; //1 Day =1440 minutes
-    }
-
-    /**
-     * Returns the base URL for SMSW api call
-     * @returns {string} Base URL for SMSW api call
-     */
-    static getBaseURL() {
-        return this.setURL;
-        // return "http://smsw.co.in/API/WebSMS/Http/v1.0a/";
-    }
-
-    /**
+     * * @author Ankush Khotpal
      * Set the OTP expiry minutes for SMSW api call
      */
     setOtpExpiry(otp_expiry) {
@@ -62,7 +34,7 @@ class SendMsg {
     send(contactNumber, senderId, otp, routeId, format, callback) {
         if (typeof otp === 'function') {
             callback = otp;
-            otp = SendOtp.generateOtp()
+            otp = SendMsg.generateOtp()
         }
         let args = {
             username: this.username,

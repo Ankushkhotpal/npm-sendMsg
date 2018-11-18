@@ -14,7 +14,7 @@ npm install npm-sendmsg --save
 
 2. Require the package in your code.
 ******************************************
-const SendOtp = require('npm-sendmsg');
+const SendMsg = require('npm-sendmsg');
 ******************************************
 
 3. Setup your configuration for http://smsw.co.in with provided username and password with url
@@ -56,7 +56,7 @@ sendMsg.send("919999999999", "PRIIND", "","31", "json", function (error, data) {
 
 To send OTP, with optional parameters
 ***************************************************************************************
-sendOtp.send("919999999999", "ANKIND", "4635", "31", "json", function (error, data) {
+sendMsg.send("919999999999", "ANKIND", "4635", "31", "json", function (error, data) {
   console.log(data);
 });
 ****************************************************************************************

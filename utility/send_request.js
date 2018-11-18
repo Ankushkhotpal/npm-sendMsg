@@ -2,16 +2,47 @@
 
 let request = require('request');
 
+
 class send_request {
 
-    /**
-     * @author Ankush Khotpal
-     * @description Creates a new SendMsg instance
-     * @param {string} rquest method for SMSW.co.in
-     * @param {string} url end path for SMSW.co.in
-     * @param {string} params for request for SMSW.co.in
-     * 
-     */
+   
+     /**
+      * @author Ankush Khotpal
+      * @description Creates a new SendMsg instance
+      * @param {string} SetURL for SMSW.co.in (http://smsw.co.in/API/WebSMS/Http/v1.0a/)
+      * @param {string} username for SMSW.co.in
+      * @param {string} password for SMSW.co.in
+      * @param {string, optional} messageTemplate
+      */
+     constructor(url, username, password, messageTemplate) {
+         this.setURL = url;
+         this.username = username;
+         this.password = password;
+         if (messageTemplate) {
+             this.messageTemplate = messageTemplate;
+         } else {
+             this.messageTemplate = "Your otp is {{otp}}. For security reasons, DO NOT share this OTP with anyone";
+         }
+         this.otp_expiry = 1440; //1 Day =1440 minutes
+     }
+
+     /**
+      * Returns the base URL for SMSW api call
+      * @returns {string} Base URL for SMSW api call
+      */
+     static getBaseURL() {
+         return this.setURL;
+         // return "http://smsw.co.in/API/WebSMS/Http/v1.0a/";
+     }
+
+      /**
+       * @description Creates a new SendMsg instance
+       * @param {string} rquest method for SMSW.co.in
+       * @param {string} url end path for SMSW.co.in
+       * @param {string} params for request for SMSW.co.in
+       * 
+       */
+
     static sendRequest(method, path, params, callback) {
 
         if (typeof params === 'function') {
@@ -25,7 +56,7 @@ class send_request {
 
         let options = {
             method: method,
-            url: SendOtp.getBaseURL() + path
+            url: send_request.getBaseURL() + path
         };
 
         if (method === 'get') {
