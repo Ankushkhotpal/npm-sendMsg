@@ -1,6 +1,6 @@
 {
   "name": "npm-sendmsg",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This package is intended to consume SMS Gateway-API as Node module. Which will help users to use to send auto generated otp with custom message. ",
   "main": "index.js",
   "repository": {
@@ -21,6 +21,6 @@
   "homepage": "https://github.com/Ankushkhotpal/Send_SMS#readme",
   "dependencies": {
     "random-number": "0.0.9",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   }
 }
