@@ -21,6 +21,6 @@
   "homepage": "https://github.com/Ankushkhotpal/Send_SMS#readme",
   "dependencies": {
     "random-number": "0.0.9",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   }
 }
