@@ -18,7 +18,7 @@ const SendMsg = require('npm-sendmsg');
 ******************************************
 
 
-3. Setup your configuration for http://smsw.co.in with provided username and password
+3. Setup your configuration from appConfig file with provided username and password
 **************************************************************************
 const sendMsg = new sendMsg('username', 'password', 'routId', 'format' 'messageTemplate');
 **************************************************************************
